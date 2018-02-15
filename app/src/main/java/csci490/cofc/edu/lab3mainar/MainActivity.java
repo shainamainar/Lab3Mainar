@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,8 +26,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         classSched = this.findViewById(R.id.class_schedule);
-        String[] listItems = {"Math", "English", "History", "Science", "PE"};
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems);
+        ArrayList<Course> courses = populateData();
+
+        //String[] listItems = {"Math", "English", "History", "Science", "PE"};
+
+        //ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems);
+        CourseAdapter adapter = new CourseAdapter(this, courses);
         classSched.setAdapter(adapter);
         classSched.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -44,6 +49,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public ArrayList<Course> populateData(){
+        Course course;
+        ArrayList<Course> courses = new ArrayList<>();
+        course = new Course();
+        course.setCourseName("Math");
+        course.setCourseNumber("1");
+        course.setProfessor("Shaina");
+        courses.add(course);
+
+        course = new Course();
+        course.setCourseName("English");
+        course.setCourseNumber("2");
+        course.setProfessor("Daniel");
+        courses.add(course);
+        return courses;
     }
 
 
